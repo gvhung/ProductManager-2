@@ -1,0 +1,50 @@
+﻿@model ProdMan_Models.Tables.ProductEigenschappen
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ProductEigenschappen</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Naam)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Naam)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nummer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nummer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PrijsFactor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PrijsFactor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Toeslag)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Toeslag)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
