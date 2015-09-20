@@ -23,19 +23,18 @@ namespace ProdMan_Models.Tables
         public decimal Prijs { get; set; }
 
         [Required(ErrorMessage = "Verplicht!")]
-        [DisplayName("Btw Code: ")]
+        [DisplayName("Btw: ")]
         public int BtwId { get; set; }
-
-        [Required(ErrorMessage = "Verplicht!")]
+        
         [DisplayName("Leveranciers Product Code: ")]
         public string LeveranciersCode { get; set; }
 
         [Required(ErrorMessage = "Verplicht!")]
-        [DisplayName("Leveranciers ID: ")]
+        [DisplayName("Leverancier: ")]
         public int LeveranciersId { get; set; }
 
         [Required(ErrorMessage = "Verplicht!")]
-        [DisplayName("Productgroep ID: ")]
+        [DisplayName("Productgroep: ")]
         public int ProductgroepId { get; set; }
 
         [DisplayName("Zoek Termen: ")]

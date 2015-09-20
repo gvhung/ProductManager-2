@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="Connection.cs" />
     <Compile Include="Dal\BtwDal.cs" />
+    <Compile Include="Dal\LeverancierDal.cs" />
     <Compile Include="Dal\ProductDal.cs" />
     <Compile Include="Dal\ProductGroepDal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,4 +1,4 @@
-﻿@model ProdMan_Models.Tables.Product
+﻿@model ProdMan_Models.View.ProductView
 
 @{
     ViewBag.Title = "Details";
@@ -10,33 +10,88 @@
     <h4>Product</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Naam)
-        </dt>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.Product.Nummer)
+        </dt>
         <dd>
-            @Html.DisplayFor(model => model.Naam)
+            @Html.DisplayFor(model => model.Product.Nummer)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Nummer)
+            @Html.DisplayNameFor(model => model.Product.Naam)
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.Nummer)
+            @Html.DisplayFor(model => model.Product.Naam)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Prijs)
+            @Html.DisplayNameFor(model => model.Product.Zoekcode)
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.Prijs)
+            @Html.DisplayFor(model => model.Product.Zoekcode)
+        </dd>
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.Product.Prijs)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Product.Prijs)
+        </dd>
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.Btw.BtwValue)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Btw.BtwValue)
+        </dd>
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductGroep.Naam)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ProductGroep.Naam)
+        </dd>
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.Leverancier.Naam)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Leverancier.Naam)
+        </dd>
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.Product.LeveranciersCode)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Product.LeveranciersCode)
+        </dd>
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.Product.Aktief)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Product.Aktief)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Product.WijziginsDatum)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Product.WijziginsDatum)
+        </dd>
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.Product.AanmaakDatum)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Product.AanmaakDatum)
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Bewerken", "Edit", new { id = Model.Product.Id }, new { @class = "btn btn-primary" })     
+    @Html.ActionLink("Terug naar de lijst", "Index",null, new { @class = "btn btn-primary" })    
+    @Html.ActionLink("Verwijderen", "Delete", new { id = Model.Product.Id }, new { @class = "btn btn-danger" })
 </p>

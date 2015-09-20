@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -12,11 +13,12 @@ namespace ProdMan.Controllers
     public class ProductController : Controller
     {
         private readonly ApplicationDbContext _db = new ApplicationDbContext();
+        private readonly ProductDal _productDal = new ProductDal();
 
         // GET: Product
         public ActionResult Index()
         {
-            return View(new ProductDal().GetAllProducts());
+            return View(_productDal.GetAllProducts());
         }
 
         // GET: Product/Details/5
@@ -26,8 +28,10 @@ namespace ProdMan.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = _db.Producten.Find(id);
-            if (product == null)
+
+            var product = _productDal.GetSingleProductView(id);
+
+            if (product.Product == null)
             {
                 return HttpNotFound();
             }
@@ -37,7 +41,12 @@ namespace ProdMan.Controllers
         // GET: Product/Create
         public ActionResult Create()
         {
-            return View();
+            var oReturn = new ProductView
+            {
+                Product = _productDal.GetNewProduct()
+            };
+
+            return View(oReturn);
         }
 
         // POST: Product/Create
@@ -47,6 +56,18 @@ namespace ProdMan.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(ProductView productView)
         {
+            var dateNow = DateTime.Now;
+
+            if (productView.Product.AanmaakDatum == DateTime.MinValue)
+            {
+                // AanmaakDatum Datetime is not set
+                productView.Product.AanmaakDatum = dateNow;
+            }
+
+            // Set edit date equal to now
+            productView.Product.WijziginsDatum = dateNow;
+
+            //var product = productView.Product;
 
             //var product = new Product();
             //product = productView.Product;
@@ -54,13 +75,13 @@ namespace ProdMan.Controllers
             if (_db.Producten.Any(o => o.Nummer == productView.Product.Nummer))
             {
                 //Number is already used
-                var mod = ModelState.First(c => c.Key == "Nummer");
+                var mod = ModelState.First(c => c.Key == "Product.Nummer");
                 mod.Value.Errors.Add("Dit nummer is al in gebruik!");
             }
 
             if (!ModelState.IsValid)
             {
-                return View(productView.Product);
+                return View(productView);
             }
 
             _db.Producten.Add(productView.Product);
@@ -95,13 +116,25 @@ namespace ProdMan.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(ProductView productView)
         {
-            if (ModelState.IsValid)
+            productView.Product.WijziginsDatum = DateTime.Now;
+
+            if (_db.Producten.Any(o => o.Nummer == productView.Product.Nummer && o.Id != productView.Product.Id))
             {
-                _db.Entry(productView.Product).State = EntityState.Modified;
-                _db.SaveChanges();
-                return RedirectToAction("Index");
+                // Number is already used
+                var mod = ModelState.First(c => c.Key == "Product.Nummer");
+                mod.Value.Errors.Add("Dit nummer is al in gebruik!");
             }
-            return View(productView.Product);
+
+            if (!ModelState.IsValid)
+            {
+                // Model is not valid!
+                return View(productView);
+            }
+
+            _db.Entry(productView.Product).State = EntityState.Modified;
+            _db.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
         // GET: Product/Delete/5
@@ -111,16 +144,14 @@ namespace ProdMan.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var productview = new ProductView();
 
-            Product product = _db.Producten.Find(id);
-            productview.Product = product;
+            var product = _productDal.GetSingleProductView(id);
 
-            if (productview.Product == null)
+            if (product.Product == null)
             {
                 return HttpNotFound();
             }
-            return View(productview);
+            return View(product);
         }
 
         // POST: Product/Delete/5

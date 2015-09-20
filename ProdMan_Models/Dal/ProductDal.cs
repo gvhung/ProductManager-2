@@ -17,9 +17,10 @@ namespace ProdMan_Models.Dal
             return _db.Btws.ToList();
         }
 
-
-
-
+        /// <summary>
+        /// Returns a full list with all productViews
+        /// </summary>
+        /// <returns></returns>
         public List<ProductView> GetAllProducts()
         {
             var taxValueList = _db.Btws.ToList();
@@ -44,6 +45,63 @@ namespace ProdMan_Models.Dal
                 return new List<ProductView>();
             }
         }
+
+        /// <summary>
+        /// Returns a new / empty product, with a new product number
+        /// </summary>
+        /// <returns></returns>
+        public Product GetNewProduct()
+        {
+            var oReturn = new Product();
+
+            try
+            {
+                // Get the product number with the higest number
+                var oList = _db.Producten.ToList().OrderByDescending(o => o.Nummer).FirstOrDefault();
+
+                if (oList != null)
+                {
+                    // Add a number
+                    oReturn.Nummer = oList.Nummer +1;
+                }
+            }
+            catch (Exception)
+            {
+              // TODO Do something with this exception
+            }
+            return oReturn;
+        }
+
+        /// <summary>
+        /// Returns e singel Product view
+        /// </summary>
+        /// <param name="productId"></param>
+        /// <returns></returns>
+        public ProductView GetSingleProductView(int? productId)
+        {
+            try
+            {
+                var oProduct = _db.Producten.Find(productId);
+                var oBtw = _db.Btws.Find(oProduct.BtwId);
+                var oProductgroep = _db.ProductGroepen.Find(oProduct.ProductgroepId);
+                var oLeverancier = _db.Leveranciers.Find(oProduct.LeveranciersId);
+
+                var oReturn = new ProductView
+                {
+                    Product = oProduct,
+                    Btw = oBtw,
+                    ProductGroep = oProductgroep,
+                    Leverancier = oLeverancier
+                };
+                return oReturn;
+            }
+            // TODO do something with the exception
+            catch (Exception)
+            {
+             return new ProductView();
+            }
+        }
+
 
         public List<ProductEigenschappenView> GetProductEigenschappenView()
         {
