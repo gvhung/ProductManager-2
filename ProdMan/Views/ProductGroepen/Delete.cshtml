@@ -4,11 +4,12 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete</h2>
+<br />
+<div class="alert alert-success">
+    <strong>Weet u zeker dat u deze product groep wilt verwijderen?</strong> Het is hierna niet meer mogelijk om dit ongedaan te maken!
+</div>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>ProductGroep</h4>
+<div>    
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -33,8 +34,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Ja" class="btn btn-danger" />
+            @Html.ActionLink("Nee", null, null, null, new { href = Request.UrlReferrer, @class = "btn btn-success" })
         </div>
     }
 </div>

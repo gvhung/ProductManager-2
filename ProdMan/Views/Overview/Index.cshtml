@@ -1,0 +1,102 @@
+﻿@using ProdMan_Models.Tables
+@using ProdMan_Models.View
+@model OverView
+@{
+    ViewBag.Title = "Producten";    
+}
+
+<div class="row">
+    
+    <div class="col-md-4">
+        
+        <h2>Producten</h2>
+        <table class="table table-striped">
+            <tr>
+                <th>
+                    <span class="glyphicon glyphicon-sort-by-order"></span>
+                </th>
+                <th>
+                                
+                </th>
+                <th>
+                    <span class="glyphicon glyphicon-euro"></span>
+                </th>
+            </tr>
+
+            @foreach (Product product in Model.Products)
+            {
+                Product p = product;
+                <tr>
+                    <td onclick="location.href = '@Url.Action("Details", "Product", new { id = product.Id })'" style="cursor: pointer;">                        
+                        @Html.DisplayFor(modelItem => p.Nummer)
+                    </td>
+                    <td onclick="location.href = '@Url.Action("Details", "Product", new { id = product.Id })'" style="cursor: pointer;">
+                        @Html.DisplayFor(modelItem => p.Naam)
+                    </td>
+                    <td onclick="location.href = '@Url.Action("Details", "Product", new { id = product.Id })'" style="cursor: pointer;">
+                        @Html.DisplayFor(modelItem => p.Prijs)
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+
+    <div class="col-md-4">
+        
+        <h2>Leverancier</h2>
+        
+        <table class="table table-striped">
+            <tr>
+                <th>
+                    <span class="glyphicon glyphicon-sort-by-alphabet"></span>
+                </th>
+                <th>
+                    <span class="glyphicon glyphicon-phone-alt glyphicon-align-right"></span>
+                </th>
+            </tr>
+
+            @foreach (Leverancier item in Model.Leveranciers)
+            {
+                Leverancier leverancier = item;                
+                <tr>
+                    <td onclick="location.href = '@Url.Action("Details", "Product", new { id = leverancier.Id })'" style="cursor: pointer;">
+                        @Html.DisplayFor(modelItem => leverancier.Naam)
+                    </td>
+                    <td onclick="location.href = '@Url.Action("Details", "Product", new { id = leverancier.Id })'" style="cursor: pointer;">
+                        @Html.DisplayFor(modelItem => leverancier.Telefoon1)
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+    
+    <div class="col-md-4">
+        
+        <h2>Productgroep</h2>
+        
+        <table class="table table-striped">
+            <tr>
+                <th>
+                    <span class="glyphicon glyphicon-sort-by-order"></span>
+                </th>
+                <th>                    
+                </th>
+            </tr>
+            @foreach (ProductGroep item in Model.ProductGroeps)
+            {
+                ProductGroep productGroep = item;
+                <tr>
+                    <td onclick="location.href = '@Url.Action("Details", "Product", new { id = productGroep.Id })'" style="cursor: pointer;">
+
+                        @Html.DisplayFor(modelItem => productGroep.Nummer)
+                    </td>
+                    <td onclick="location.href = '@Url.Action("Details", "Product", new { id = productGroep.Id })'" style="cursor: pointer;">
+                        @Html.DisplayFor(modelItem => productGroep.Naam)
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+    
+</div>

@@ -36,8 +36,8 @@ namespace ProdMan_Models.Dal
                     Leverancier = leverancierList.Find(l => l.Id == p.LeveranciersId),
                     ProductGroep = productGroepList.Find(o => o.Id == p.ProductgroepId)
                 })
-                .OrderBy(p => p.Product.Nummer)
-                .ToList();
+                    .OrderBy(p => p.Product.Nummer)
+                    .ToList();
             }
                 // TODO do something with the exception
             catch (Exception)
@@ -62,12 +62,12 @@ namespace ProdMan_Models.Dal
                 if (oList != null)
                 {
                     // Add a number
-                    oReturn.Nummer = oList.Nummer +1;
+                    oReturn.Nummer = oList.Nummer + 1;
                 }
             }
             catch (Exception)
             {
-              // TODO Do something with this exception
+                // TODO Do something with this exception
             }
             return oReturn;
         }
@@ -79,6 +79,9 @@ namespace ProdMan_Models.Dal
         /// <returns></returns>
         public ProductView GetSingleProductView(int? productId)
         {
+            //write query to output window
+            _db.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
+
             try
             {
                 var oProduct = _db.Producten.Find(productId);
@@ -95,10 +98,10 @@ namespace ProdMan_Models.Dal
                 };
                 return oReturn;
             }
-            // TODO do something with the exception
+                // TODO do something with the exception
             catch (Exception)
             {
-             return new ProductView();
+                return new ProductView();
             }
         }
 

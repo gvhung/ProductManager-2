@@ -60,6 +60,7 @@
     <Compile Include="Connection.cs" />
     <Compile Include="Dal\BtwDal.cs" />
     <Compile Include="Dal\LeverancierDal.cs" />
+    <Compile Include="Dal\OverviewDal.cs" />
     <Compile Include="Dal\ProductDal.cs" />
     <Compile Include="Dal\ProductGroepDal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="Tables\ProductEigenschappenKoppeling.cs" />
     <Compile Include="Tables\Producten.cs" />
     <Compile Include="Tables\ProductGroep.cs" />
+    <Compile Include="View\OverView.cs" />
     <Compile Include="View\ProductEigenschappenView.cs" />
     <Compile Include="View\ProductView.cs" />
   </ItemGroup>

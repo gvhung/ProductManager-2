@@ -96,8 +96,8 @@
         @Html.AntiForgeryToken()
         <div class="form-actions no-color">
             
-            <input type="submit" value="Ja" class="btn btn-danger" /> 
-            @Html.ActionLink("Nee", "Index", null, new { @class = "btn btn-success" })
+            <input type="submit" value="Ja" class="btn btn-danger" />             
+            @Html.ActionLink("Nee", null, null, null, new { href = Request.UrlReferrer, @class = "btn btn-success" })
         </div>
     }
 </div>
