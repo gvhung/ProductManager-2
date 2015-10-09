@@ -1,0 +1,5 @@
+
+workstation id=FieksDemoDatabase.mssql.somee.com;packet size=4096;user id=Fiek_SQLLogin_1;pwd=ptbwsxtciz;data source=FieksDemoDatabase.mssql.somee.com;persist security info=False;initial catalog=FieksDemoDatabase
+
+
+

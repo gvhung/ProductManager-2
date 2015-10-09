@@ -1,0 +1,18 @@
+﻿
+
+<script type="text/javascript" src="~/Scripts/angular.min.js"></script>
+<script type="text/javascript" src="~/Scripts/Custom/app.js"></script>
+
+
+
+
+
+<div ng-controller="MyCtrl">
+    <div ng-repeat="address in addresses">
+        Billing State:
+        <select ng-model="address.state"
+                ng-options="state.lookupCode as state.description for state in lov_state"></select>
+        <tt>State selected: {{address.state}}</tt>
+    </div>
+
+</div>
